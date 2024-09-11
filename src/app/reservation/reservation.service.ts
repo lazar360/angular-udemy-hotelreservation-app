@@ -6,9 +6,9 @@ import { Reservation } from '../models/reservation';
 })
 export class ReservationService {
 
-// CRUD
 private reservations:Reservation[] = [];
 
+// CRUD
 getReservations(): Reservation[]{
   return this.reservations; 
 }
@@ -19,6 +19,7 @@ getReservation(id: string): Reservation | undefined{
 
 addReservation(reservation:Reservation): void{
   this.reservations.push(reservation);
+  console.log(this.reservations);
 }
 
 deleteReservation(id:string): void{

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReservationService } from '../reservation/reservation.service';
+import { Reservation } from '../models/reservation';
 
 @Component({
   selector: 'app-reservation-form',
@@ -10,8 +12,8 @@ export class ReservationFormComponent implements OnInit{
   
   reservationForm: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder){
-
+  constructor(private formBuilder: FormBuilder, 
+    private reservationService:ReservationService){
   }
 
   ngOnInit(): void {
@@ -21,13 +23,13 @@ export class ReservationFormComponent implements OnInit{
       guestName:['', Validators.required],
       guestEmail:['', [Validators.required, Validators.email]],
       roomNumber:['', Validators.required]
-    
     })
   }
 
   onSubmit() {
       if(this.reservationForm.valid){
-        console.log("valid");
+        let reservation: Reservation = this.reservationForm.value;
+        this.reservationService.addReservation(reservation); // pas de mapping à faire avec un new Reservation
         
       }
     }
