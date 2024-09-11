@@ -23,6 +23,7 @@ getReservation(id: string): Reservation | undefined{
 }
 
 addReservation(reservation:Reservation): void{
+  reservation.id = Date.now().toString();
   this.reservations.push(reservation);
   localStorage.setItem("reservations", JSON.stringify(this.reservations)); 
 }
@@ -33,9 +34,9 @@ deleteReservation(id:string): void{
   localStorage.setItem("reservations", JSON.stringify(this.reservations)); 
 }
 
-updateResrvation(updatedResrvation:Reservation): void{
-  let index = this.reservations.findIndex(res => res.id === updatedResrvation.id);
-  this.reservations[index] = updatedResrvation;
+updateResrvation(id: string, updatedReservation:Reservation): void{
+  let index = this.reservations.findIndex(res => res.id === id);
+  this.reservations[index] = updatedReservation;
   localStorage.setItem("reservations", JSON.stringify(this.reservations)); 
 }
 
